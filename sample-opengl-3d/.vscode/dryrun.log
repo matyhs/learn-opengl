@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/d/personal/repos/sample-opengl-3d'
+clang++ -std=c++20 -I ./include -c -Wall -Wextra -Wpedantic -Werror main.cpp -o main.o
+clang++ -std=c++20 -I ./include -c -Wall -Wextra -Wpedantic -Werror shader.cpp -o shader.o
+clang -I ./include -c -Wall -Wextra -Wpedantic -Werror glad.c -o glad.o
+clang++ -std=c++20 -I ./include -c -Wall -Wextra -Wpedantic -Werror stb_image.cpp -o stb_image.o
+clang++ -std=c++20 -I ./include -c -Wall -Wextra -Wpedantic -Werror camera.cpp -o camera.o
+clang++ main.o shader.o glad.o stb_image.o camera.o -o main -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl
+make: Leaving directory '/mnt/d/personal/repos/sample-opengl-3d'
+ 

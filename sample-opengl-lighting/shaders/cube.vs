@@ -1,0 +1,20 @@
+#version 330 core
+
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+out vec3 Normal;
+out vec3 FragPos;
+
+void main() {
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    // we need to tranform the normal vectors to world space coordinates, since all calculation in the fragment shader is done in the world space.
+    // Note: for the purpose of experiment, inverse calculation is done on the shader (GPU), but inverse calculation is expensive, so it's better to do
+    // the calculation on the CPU and pass the result to the GPU.
+    Normal = mat3(transpose(inverse(model))) * aNormal;
+}
